@@ -5,15 +5,15 @@
 #define DHTPIN 7         // Digital pin connected to the DHT sensor
 #define DHTTYPE DHT11    // DHT 11
 
-char SSID[] = "Tenda_0A9868";         
-char PASW[] = "1122334455";     
-unsigned long channelId = 2251042;   
-const char *APIkey = " ERU8L9QRKM5ZBVZF ";
+char SSID[] = "Tenda_0A9868";                //wi-fi network SSID
+char PASW[] = "1122334455";                  //Wi-fi network password
+unsigned long channelId = 2251042;           //thingspeak channel ID
+const char *APIkey = " ERU8L9QRKM5ZBVZF ";   //thingspeak API key
 
 WiFiClient clients;
 DHT dht(7, DHT11);
 
-void setup() {
+void setup() {                          //initiate the serial communication, initialize the DHT sensor, and then attempt to connect to the specified Wi-Fi network. It waits in a loop until a successful connection is established and then prints a message.
   Serial.begin(9600);
   dht.begin();
 
@@ -26,7 +26,7 @@ void setup() {
 
 Serial.println("WiFi Connected Succesfully");
 
-  ThingSpeak.begin(clients);
+  ThingSpeak.begin(clients); //initalizing the thingspeak library
 
 }
 
@@ -38,7 +38,7 @@ void loop() {
   Serial.print(temperature);
   Serial.println(" °C");
 
-  ThingSpeak.writeField(channelId, 1, temperature, APIkey);
+  ThingSpeak.writeField(channelId, 1, temperature, APIkey);   //  sends the temperature read and printed to your ThingSpeak channel
   Serial.print("Data sent succesfully: ");
   
 
